@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'HappyhouseVueHouseRegist',
+  name: 'HappyhouseVueInterestView',
 
   data() {
     return {
