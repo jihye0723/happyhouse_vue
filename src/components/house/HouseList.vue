@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'VuejsHouseList',
+  name: 'HappyhouseVueHouseList',
 
   data() {
     return {
