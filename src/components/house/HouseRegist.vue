@@ -1,15 +1,12 @@
 <template>
   <div>
-    <b-container>
-      <h2>house view</h2>
-      <router-view></router-view>
-    </b-container>
+    <h2>house regist</h2>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HappyhouseVueHouseView",
+  name: "HappyhouseVueHouseRegist",
 
   data() {
     return {};
