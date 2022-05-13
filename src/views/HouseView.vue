@@ -1,29 +1,19 @@
 <template>
-  <div>
-    
-  </div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: 'HappyhouseVueHouseView',
+  name: "HappyhouseVueHouseView",
 
   data() {
-    return {
-      
-    };
+    return {};
   },
 
-  mounted() {
-    
-  },
+  mounted() {},
 
-  methods: {
-    
-  },
+  methods: {},
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
