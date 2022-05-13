@@ -1,3 +1,4 @@
+
 # happyhouse-vue
 
 ## Project setup
