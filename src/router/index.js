@@ -11,9 +11,9 @@ import UserView from "@/views/UserView.vue";
 import HouseRegist from "@/components/house/HouseRegist.vue";
 import HouseSearch from "@/components/house/HouseSearch.vue";
 // import UserDelete from "@/components/user/UserDelete.vue";
-// import UserLogin from "@/components/user/UserLogin.vue";
+import UserLogin from "@/components/user/UserLogin.vue";
 // import UserModify from "@/components/user/UserModify.vue";
-// import UserRegist from "@/components/user/UserRegist.vue";
+import UserRegist from "@/components/user/UserRegist.vue";
 
 Vue.use(VueRouter);
 
@@ -49,6 +49,18 @@ const routes = [
     path: "/user",
     name: "user",
     component: UserView,
+    children: [
+      {
+        path: "regist",
+        name: "regist",
+        component: UserRegist,
+      },
+      {
+        path: "login",
+        name: "login",
+        component: UserLogin,
+      },
+    ],
   },
   {
     path: "/article",
