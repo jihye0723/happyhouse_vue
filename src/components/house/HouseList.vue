@@ -29,7 +29,8 @@ export default {
 
   created() {
     this.settingSearchParams();
-    this.getDealListByName();
+    if (this.dongCode == 0) this.getDealListByName();
+    else this.getDealListByDongCode();
   },
   mounted() {},
 
@@ -51,6 +52,16 @@ export default {
         });
     }, // end of get Deal List By Name
 
+    getDealListByDongCode() {
+      http
+        .get("/resthouse/dealInfoByDongCode/" + this.dongCode)
+        .then(({ data }) => {
+          console.log("Get dealInfoByDongCode Success");
+          this.dealList = data;
+          console.log(this.dealList);
+          this.settingTableItems();
+        });
+    },
     settingTableItems() {
       console.log(this.dealList);
       this.dealList.forEach((element) => {
