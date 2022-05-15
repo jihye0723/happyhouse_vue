@@ -15,6 +15,7 @@ import HouseSearch from "@/components/house/HouseSearch.vue";
 import UserLogin from "@/components/user/UserLogin.vue";
 // import UserModify from "@/components/user/UserModify.vue";
 import UserRegist from "@/components/user/UserRegist.vue";
+import UserRegistLevel from "@/components/user/UserRegistLevel.vue";
 
 Vue.use(VueRouter);
 
@@ -57,9 +58,16 @@ const routes = [
     component: UserView,
     children: [
       {
-        path: "regist",
-        name: "regist",
-        component: UserRegist,
+        path: "registlevel",
+        name: "registlevel",
+        component: UserRegistLevel,
+        children: [
+          {
+            path: "regist",
+            name: "regist",
+            component: UserRegist,
+          },
+        ],
       },
       {
         path: "login",
