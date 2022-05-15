@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-container>
-      <h2>House Search</h2>
+      <h2>검색 방식을 선택하세요</h2>
       <div class="row col-6 mx-auto">
         <b-button variant="primary" class="m-2 col" @click="clickDongSearch"
           >동이름으로 검색</b-button
@@ -10,49 +10,54 @@
           >아파트 이름으로 검색</b-button
         >
       </div>
-      <b-form v-if="dongSearch">
+      <div style="height: 100px"></div>
+
+      <b-form v-if="dongSearch" class="col-6 mx-auto">
+        <div><strong>시/도</strong></div>
         <b-form-select
           v-model="sidoCode"
           :options="sidoOptions"
-          class="m-3"
+          class="form-select m-3"
           value-field="code"
           text-field="name"
         ></b-form-select>
+        <div><strong>구/군</strong></div>
         <b-form-select
           v-model="gugunCode"
           :options="gugunOptions"
-          class="m-3"
+          class="form-select m-3"
           value-field="code"
           text-field="name"
         ></b-form-select>
+        <div><strong>행정동</strong></div>
+
         <b-form-select
           v-model="dongCode"
           :options="dongOptions"
-          class="m-3"
+          class="form-select m-3"
           value-field="code"
           text-field="name"
         ></b-form-select>
-        <router-link
+        <b-button
           :to="{ name: 'list', params: { code: dongCode, name: apartName } }"
-          >검색</router-link
-        >
-        <b-button variant="primary" class="m-2" @click="clickDongSearchButton"
+          variant="primary"
+          class="m-5"
           >검색</b-button
         >
       </b-form>
 
-      <b-form v-if="apartSearch">
+      <b-form v-if="apartSearch" class="col-6 mx-auto">
         <div><strong>아파트 이름</strong></div>
         <b-form-input
           class="formInput"
           v-model="apartName"
           :placeholder="apartNamePlaceHolder"
         />
-        <router-link
+
+        <b-button
           :to="{ name: 'list', params: { code: 0, name: apartName } }"
-          >검색</router-link
-        >
-        <b-button variant="primary" class="m-2" @click="clickApartSearchButton"
+          variant="primary"
+          class="m-5"
           >검색</b-button
         >
       </b-form>
@@ -132,20 +137,12 @@ export default {
       this.dongSearch = false;
       this.apartSearch = true;
     },
-
-    clickApartSearchButton() {
-      console.log("click Apart Search Button");
-    },
-    clickDongSearchButton() {
-      console.log("click Dong Search Button");
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .formInput {
-  width: 50%;
   margin-left: auto;
   margin-right: auto;
 }

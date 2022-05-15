@@ -1,10 +1,10 @@
 <template>
   <div>
     <b-container>
-      <b-button variant="outline-primary" to="/house/regist"
+      <b-button to="/house/regist" variant="outline-primary" class="m-2"
         >매물 등록</b-button
       >
-      <b-button variant="outline-primary" to="/house/search"
+      <b-button to="/house/search" variant="outline-primary" class="m-2"
         >아파트 정보 검색</b-button
       >
     </b-container>
