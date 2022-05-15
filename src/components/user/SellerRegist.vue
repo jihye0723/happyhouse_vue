@@ -1,6 +1,6 @@
 <template>
-  <div class="text-center">
-    <h2>관심목록 페이지에오</h2>
+  <div>
+    <h2>중개인 회원가입</h2>
   </div>
 </template>
 

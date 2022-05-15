@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <h2>관심목록 페이지에오</h2>
+    <h2>회원정보페이지</h2>
   </div>
 </template>
 
