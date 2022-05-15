@@ -8,6 +8,7 @@ import UserView from "@/views/UserView.vue";
 // //import MainContent from "@/components/MainContent.vue";
 // import HouseDetail from "@/components/house/HouseDetail.vue";
 // import HouseList from "@/components/house/HouseList.vue";
+import HouseList from "@/components/house/HouseList.vue";
 import HouseRegist from "@/components/house/HouseRegist.vue";
 import HouseSearch from "@/components/house/HouseSearch.vue";
 // import UserDelete from "@/components/user/UserDelete.vue";
@@ -37,6 +38,11 @@ const routes = [
         path: "search",
         name: "search",
         component: HouseSearch,
+      },
+      {
+        path: "list/:code/:name",
+        name: "list",
+        component: HouseList,
       },
     ],
   },

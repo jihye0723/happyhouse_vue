@@ -23,6 +23,9 @@
         v-model="dongSelected"
         :options="dongOptions"
       ></b-form-select>
+      <b-button variant="primary" class="m-2" @click="clickDongSearchButton"
+        >검색</b-button
+      >
     </b-form>
 
     <b-form v-if="apartSearch">
@@ -32,6 +35,12 @@
         v-model="apartName"
         :placeholder="apartNamePlaceHolder"
       />
+      <router-link :to="{ name: 'list', params: { code: 0, name: apartName } }"
+        >검색</router-link
+      >
+      <b-button variant="primary" class="m-2" @click="clickApartSearchButton"
+        >검색</b-button
+      >
     </b-form>
   </div>
 </template>
@@ -94,6 +103,13 @@ export default {
     clickApartSearch() {
       this.dongSearch = false;
       this.apartSearch = true;
+    },
+
+    clickApartSearchButton() {
+      console.log("click Apart Search Button");
+    },
+    clickDongSearchButton() {
+      console.log("click Dong Search Button");
     },
   },
 
