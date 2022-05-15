@@ -11,6 +11,7 @@
     </b-container>
     <b-form v-if="dongSearch">
       <b-form-select
+        v-if="sidoOptions"
         v-model="sidoSelected"
         :options="sidoOptions"
       ></b-form-select>
@@ -36,6 +37,8 @@
 </template>
 
 <script>
+import http from "@/api/http";
+
 export default {
   name: "HappyhouseVueHouseSearch",
 
@@ -48,36 +51,56 @@ export default {
       dongSelected: null,
       apartName: "",
       apartNamePlaceHolder: "아파트 이름을 입력하세요. ex) 푸르지오",
-      sidoOptions: [
-        { value: null, text: "시/도 선택" },
-        { value: "a", text: "This is First option" },
-        { value: "b", text: "Selected Option", disabled: true },
-      ],
+      sidoOptions: [],
       gugunOptions: [
-        { value: null, text: "시/도 선택" },
+        { value: null, text: "구/군 선택" },
         { value: "a", text: "This is First option" },
         { value: "b", text: "Selected Option", disabled: true },
       ],
       dongOptions: [
-        { value: null, text: "시/도 선택" },
+        { value: null, text: "동 선택" },
         { value: "a", text: "This is First option" },
         { value: "b", text: "Selected Option", disabled: true },
       ],
+      options: {
+        code: "",
+        name: "",
+      },
+      code: "",
+      name: "",
     };
   },
 
-  mounted() {},
-
   methods: {
+    // axios를 통해 rest server에서 sido 정보 얻어오기
+    getSidoList() {
+      http.get("http://localhost:9999/server/region/sido").then(({ data }) => {
+        console.log("data : " + data);
+        this.sidoOptions = data;
+        console.log("option : " + this.sidoOptions);
+        console.log("글보기 완료!!!");
+      });
+    },
+
+    // 받아온 시/도 데이터 렌더링
+    makeSidoSelectList() {},
+    getSidoOptions() {},
+    // 동이름으로 검색하기 버튼 클릭시 입력리스트 수정
     clickDongSearch() {
       this.dongSearch = true;
       this.apartSearch = false;
     },
+    // 아파트 이름으로 검색하기 버튼 클릭시 입력리스트 수정
     clickApartSearch() {
       this.dongSearch = false;
       this.apartSearch = true;
     },
   },
+
+  created() {
+    this.getSidoList();
+  },
+  mounted() {},
 };
 </script>
 
