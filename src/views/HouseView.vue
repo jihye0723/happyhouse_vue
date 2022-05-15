@@ -1,7 +1,6 @@
 <template>
   <div>
     <b-container>
-      <h2>house view</h2>
       <router-view></router-view>
     </b-container>
   </div>
