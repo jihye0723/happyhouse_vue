@@ -5,6 +5,7 @@ import ArticleView from "@/views/ArticleView.vue";
 import HouseView from "@/views/HouseView.vue";
 import InterestView from "@/views/InterestView.vue";
 import UserView from "@/views/UserView.vue";
+import UserDetailView from "@/views/UserDetailView.vue";
 // //import MainContent from "@/components/MainContent.vue";
 // import HouseDetail from "@/components/house/HouseDetail.vue";
 // import HouseList from "@/components/house/HouseList.vue";
@@ -46,6 +47,11 @@ const routes = [
         component: HouseList,
       },
     ],
+  },
+  {
+    path: "/detail",
+    name: "detail",
+    component: UserDetailView,
   },
   {
     path: "/interest",
