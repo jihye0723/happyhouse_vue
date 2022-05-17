@@ -12,6 +12,8 @@ export default new Vuex.Store({
     level: "",
     house: null,
     houseinfo: null,
+    markers: [],
+    apartCodes: [],
   },
   getters: {},
   mutations: {
@@ -21,14 +23,26 @@ export default new Vuex.Store({
       state.level = user.level;
     },
 
+    FORMAT_DATA(state) {
+      state.house = null;
+      state.houseinfo = null;
+      state.markers = [];
+      state.apartCodes = [];
+    },
     SHOW_APART_DETAIL(state, houseDealInfo) {
       state.house = houseDealInfo;
     },
     SETTING_HOUSE_INFO(state, houseinfo) {
       state.houseinfo = houseinfo;
     },
+    UPDATE_APTCODE(state, aptcodes) {
+      state.apartCodes = aptcodes;
+    },
   },
   actions: {
+    initSetting({ commit }) {
+      commit("FORMAT_DATA");
+    },
     showApartDetail({ commit }, houseitem) {
       http
         .get("/resthouse/dealInfoByDealNo/" + houseitem.no)
@@ -43,6 +57,22 @@ export default new Vuex.Store({
               commit("SETTING_HOUSE_INFO", data);
             });
         });
+    },
+    async updateAptcodes({ commit }, playload) {
+      await commit("UPDATE_APTCODE", playload);
+      playload.forEach((element, index) => {
+        console.log("resthouse/houseInfoByApartCode/" + element);
+        http
+          .get("resthouse/houseInfoByApartCode/" + element)
+          .then(({ data }) => {
+            let marker = {
+              code: playload[index],
+              lat: data.lat,
+              lng: data.lng,
+            };
+            this.state.markers.push(marker);
+          });
+      });
     },
   },
   modules: {},
