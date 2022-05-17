@@ -78,7 +78,7 @@ export default new Vuex.Store({
           context.commit("login", user);
           // sessionStorage.setItem("userinfo", JSON.stringify(user));
         });
-
+    },
     async updateAptcodes({ commit }, playload) {
       await commit("UPDATE_APTCODE", playload);
       playload.forEach((element, index) => {
@@ -94,9 +94,9 @@ export default new Vuex.Store({
             this.state.markers.push(marker);
           });
       });
-
     },
   },
+
   modules: {},
   plugins: [
     createPersistedState({
