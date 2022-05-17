@@ -44,6 +44,26 @@ export default new Vuex.Store({
             });
         });
     },
+    loginvv(context, user) {
+      console.log(user.userid + " " + user.userpass);
+      http
+        .post("/restuser/login", null, {
+          params: {
+            userid: user.userid,
+            userpass: user.userpass,
+          },
+        })
+        .then(function (response) {
+          const user = {
+            userid: response.data.userid,
+            username: response.data.username,
+            level: response.data.level,
+          };
+          console.log(user);
+          context.commit("login", user);
+          // sessionStorage.setItem("userinfo", JSON.stringify(user));
+        });
+    },
   },
   modules: {},
   plugins: [

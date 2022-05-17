@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import http from "@/api/http";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -35,36 +35,13 @@ export default {
   },
 
   methods: {
+    ...mapActions({ loginvv: "loginvv" }),
     loginBtn() {
-      console.log(this.userid + " " + this.userpass);
-      http
-        .post("/restuser/login", null, {
-          params: {
-            userid: this.userid,
-            userpass: this.userpass,
-          },
-        })
-
-        .then(function (response) {
-          const user = {
-            userid: response.data.userid,
-            username: response.data.username,
-            level: response.data.level,
-          };
-          console.log(user);
-          this.$store.commit("login", user);
-          this.$router.push("/");
-        });
-      // http({
-      //   method: "post",
-      //   url: "/restuser/login",
-      //   data:
-      //     // userid: this.userid,
-      //     // userpass: this.userpass,
-      //     JSON.stringify(param),
-      // }).then(function (response) {
-      //   console.log("response : " + JSON.stringify(response));
-      // });
+      let user = {
+        userid: this.userid,
+        userpass: this.userpass,
+      };
+      this.loginvv(user);
     },
   },
 };
