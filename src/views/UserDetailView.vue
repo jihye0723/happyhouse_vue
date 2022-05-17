@@ -57,8 +57,8 @@
           :readonly="validated ? '' : readonly"
         ></b-form-input>
       </b-input-group>
-      <b-button @click="modify">수정</b-button>
-      <b-button hidden id="modifyendBtn" @click="modifyend">완료</b-button>
+      <b-button @click="modify">{{ msg }}</b-button>
+      <b-button hidden @click="modifyend">완료</b-button>
     </b-container>
   </div>
 </template>
@@ -68,13 +68,15 @@ import http from "@/api/http";
 export default {
   data() {
     return {
-      readonly: 1,
+      validated: true,
+      msg: "수정",
       userinfo: {},
     };
   },
   methods: {
     modify() {
-      this.readonly = 0;
+      this.validated = false;
+      this.msg = "완료";
     },
   },
   created() {
