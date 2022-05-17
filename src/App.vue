@@ -2,7 +2,6 @@
   <div id="app">
     <b-container>
       <header-nav></header-nav>
-      <div style="height: 100px"></div>
       <router-view />
     </b-container>
   </div>

@@ -67,6 +67,7 @@ export default {
   },
 
   created() {
+    this.initSetting();
     this.settingSearchParams();
     if (this.dongCode == 0) this.getDealListByName();
     else this.getDealListByDongCode();
@@ -74,6 +75,10 @@ export default {
   mounted() {},
 
   methods: {
+    initSetting() {
+      this.$store.dispatch("initSetting");
+    },
+
     settingSearchParams() {
       this.apartName = this.$route.params.name;
       this.dongCode = this.$route.params.code;
@@ -103,14 +108,28 @@ export default {
     },
     settingTableItems() {
       // console.log(this.dealList);
+      let codes = [];
       this.dealList.forEach((element) => {
         let item = {};
         item.no = element.no;
         item.apartName = element.aptName;
         item.dealAmount = element.dealAmount;
         this.tableitems.push(item);
+
+        // 마커 생성을 위한 아파트 코드 저장
+        codes.push(element.aptCode);
         // console.log(element);
       });
+
+      // 중복 마커 제거
+      let aptcodes = [];
+      codes.forEach((element) => {
+        if (!aptcodes.includes(element)) {
+          aptcodes.push(element);
+        }
+      });
+      console.log("aptcodes : " + aptcodes);
+      // this.$store.dispatch("updateAptcodes", aptcodes);
     }, // end of setting Table Items
 
     selectApartName(houseitem, index) {
