@@ -54,7 +54,7 @@ export default {
       perPage: 10,
       currentPage: 1,
       fields: [
-        { key: "no", label: "거래번호" },
+        { key: "no", label: "매매번호" },
         { key: "apartName", label: "아파트 이름" },
         { key: "dealAmount", label: "매매가격" },
       ],

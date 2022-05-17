@@ -5,6 +5,7 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
+          <b-nav-item to="/board">QnA게시판</b-nav-item>
           <b-nav-item to="/user/login">로그인 및 회원가입</b-nav-item>
           <b-nav-item>Logout</b-nav-item>
           <b-nav-item to="/detail">회원정보</b-nav-item>
