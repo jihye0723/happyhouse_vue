@@ -36,10 +36,6 @@ export default {
 
   methods: {
     loginBtn() {
-      // let param = {
-      //   userid: this.userid,
-      //   userpass: this.userpass,
-      // };
       console.log(this.userid + " " + this.userpass);
       http
         .post("/restuser/login", null, {
@@ -48,13 +44,16 @@ export default {
             userpass: this.userpass,
           },
         })
+
         .then(function (response) {
-          let user = {
+          const user = {
             userid: response.data.userid,
             username: response.data.username,
             level: response.data.level,
           };
           console.log(user);
+          this.$store.commit("login", user);
+          this.$router.push("/");
         });
       // http({
       //   method: "post",
