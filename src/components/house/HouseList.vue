@@ -1,30 +1,69 @@
 <template>
   <div>
-    <b-container>
-      <div><h2>아파트 매매 목록</h2></div>
+    <b-container class="mt-3 text-center">
+      <div class="m-3">
+        <h2><strong>아파트 매매 목록</strong></h2>
+      </div>
       <div>Search KEY : {{ apartName }}, {{ dongCode }}</div>
-      <b-table striped hover :items="tableitems" :fields="fields"></b-table>
+      <b-row>
+        <b-col cols="6" align="center">
+          <b-table
+            striped
+            hover
+            id="dealtable"
+            :items="tableitems"
+            :fields="fields"
+            :per-page="perPage"
+            :current-page="currentPage"
+            align="center"
+            @row-clicked="selectApartName"
+          >
+          </b-table>
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="rows"
+            :per-page="perPage"
+            aria-controls="dealtable"
+          ></b-pagination>
+        </b-col>
+        <b-col>
+          <main-kakao-map></main-kakao-map>
+          <show-apart-detail></show-apart-detail>
+        </b-col>
+      </b-row>
     </b-container>
   </div>
 </template>
 
 <script>
 import http from "@/api/http";
-
+import ShowApartDetail from "@/components/house/ShowApartDetail";
+import MainKakaoMap from "@/components/house/MainKakaoMap";
 export default {
   name: "HappyhouseVueHouseList",
-
+  components: {
+    ShowApartDetail,
+    MainKakaoMap,
+  },
   data() {
     return {
       apartName: "", // route param으로 넘겨받은 아파트 이름
       dongCode: "", // route param으로 넘겨받은 행정동 코드
       dealList: [], // apartName으로 검색한 매물 목록
       tableitems: [],
+      perPage: 10,
+      currentPage: 1,
       fields: [
+        { key: "no", label: "거래번호" },
         { key: "apartName", label: "아파트 이름" },
         { key: "dealAmount", label: "매매가격" },
       ],
     };
+  },
+  computed: {
+    rows() {
+      return this.tableitems.length;
+    },
   },
 
   created() {
@@ -63,16 +102,21 @@ export default {
         });
     },
     settingTableItems() {
-      console.log(this.dealList);
+      // console.log(this.dealList);
       this.dealList.forEach((element) => {
         let item = {};
-
+        item.no = element.no;
         item.apartName = element.aptName;
         item.dealAmount = element.dealAmount;
         this.tableitems.push(item);
-        console.log(element);
+        // console.log(element);
       });
     }, // end of setting Table Items
+
+    selectApartName(houseitem, index) {
+      this.$store.dispatch("showApartDetail", houseitem);
+      console.log("select Apart : " + index + " " + houseitem);
+    },
   },
 };
 </script>

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
+import http from "@/api/http";
 
 Vue.use(Vuex);
 
@@ -9,6 +10,8 @@ export default new Vuex.Store({
     userid: "",
     username: "",
     level: "",
+    house: null,
+    houseinfo: null,
   },
   getters: {},
   mutations: {
@@ -17,8 +20,31 @@ export default new Vuex.Store({
       state.username = user.username;
       state.level = user.level;
     },
+
+    SHOW_APART_DETAIL(state, houseDealInfo) {
+      state.house = houseDealInfo;
+    },
+    SETTING_HOUSE_INFO(state, houseinfo) {
+      state.houseinfo = houseinfo;
+    },
   },
-  actions: {},
+  actions: {
+    showApartDetail({ commit }, houseitem) {
+      http
+        .get("/resthouse/dealInfoByDealNo/" + houseitem.no)
+        .then(({ data }) => {
+          console.log("detail apart code : " + data.aptCode);
+          commit("SHOW_APART_DETAIL", data);
+
+          http
+            .get("/resthouse/houseInfoByApartCode/" + data.aptCode)
+            .then(({ data }) => {
+              console.log(data.aptName);
+              commit("SETTING_HOUSE_INFO", data);
+            });
+        });
+    },
+  },
   modules: {},
   plugins: [
     createPersistedState({
