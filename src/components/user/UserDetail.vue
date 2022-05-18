@@ -7,10 +7,7 @@
             >이름
           </b-input-group-text>
         </template>
-        <b-form-input
-          v-model="userinfo.username"
-          :readonly="validated ? '' : readonly"
-        ></b-form-input>
+        <b-form-input v-model="userinfo.username" readonly></b-form-input>
       </b-input-group>
       <b-input-group class="m-3">
         <template #prepend>
@@ -30,10 +27,7 @@
             >비밀번호</b-input-group-text
           >
         </template>
-        <b-form-input
-          v-model="userinfo.userpass"
-          :readonly="validated ? '' : readonly"
-        ></b-form-input>
+        <b-form-input v-model="userinfo.userpass" readonly></b-form-input>
       </b-input-group>
       <b-input-group class="m-3">
         <template #prepend>
@@ -41,10 +35,7 @@
             >전화번호</b-input-group-text
           >
         </template>
-        <b-form-input
-          v-model="userinfo.phone"
-          :readonly="validated ? '' : readonly"
-        ></b-form-input>
+        <b-form-input v-model="userinfo.phone" readonly></b-form-input>
       </b-input-group>
       <b-input-group class="m-3">
         <template #prepend>
@@ -52,12 +43,8 @@
             >이메일</b-input-group-text
           >
         </template>
-        <b-form-input
-          v-model="userinfo.email"
-          :readonly="validated ? '' : readonly"
-        ></b-form-input>
+        <b-form-input v-model="userinfo.email" readonly></b-form-input>
       </b-input-group>
-      <b-button @click="modify">{{ msg }}</b-button>
     </b-container>
   </div>
 </template>
@@ -67,16 +54,8 @@ import http from "@/api/http";
 export default {
   data() {
     return {
-      validated: true,
-      msg: "수정",
       userinfo: {},
     };
-  },
-  methods: {
-    modify() {
-      this.validated = false;
-      this.msg = "완료";
-    },
   },
   created() {
     let userid = this.$store.state.userid;
