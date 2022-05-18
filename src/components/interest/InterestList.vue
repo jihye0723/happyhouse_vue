@@ -56,7 +56,12 @@ export default {
     console.log("관심목록조회할 사람 : " + userid);
     http.get("/interest/" + userid).then(({ data }) => {
       console.log(data);
-      this.interests = data;
+      data.forEach((element) => {
+        let interest = {
+          aptname: element,
+        };
+        this.interests.push(interest);
+      });
     });
   },
 };

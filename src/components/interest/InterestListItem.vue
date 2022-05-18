@@ -1,7 +1,9 @@
 <template>
   <b-row>
     <b-col cols="10" class="align-self-center">
-      {{ interest }}
+      <b-tr>
+        <b-td>{{ aptname }} </b-td>
+      </b-tr>
     </b-col>
   </b-row>
 </template>
@@ -9,8 +11,9 @@
 <script>
 export default {
   props: {
-    interest: String,
+    aptname: String,
   },
+  created() {},
 };
 </script>
 
