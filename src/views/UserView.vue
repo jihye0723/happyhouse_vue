@@ -1,8 +1,17 @@
 <template>
   <div class="text-center">
     <b-container>
-      <router-link to="/user/login"><button>로그인</button></router-link>
-      <router-link to="/user/registlevel">회원가입</router-link>
+      <router-link to="/user/login"
+        ><b-button pill variant="outline-secondary"
+          >로그인</b-button
+        ></router-link
+      >
+
+      <router-link to="/user/registlevel"
+        ><b-button pill variant="outline-secondary"
+          >회원가입</b-button
+        ></router-link
+      >
     </b-container>
     <router-view></router-view>
   </div>

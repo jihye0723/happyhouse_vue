@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-    <h2>로그인</h2>
+  <b-container class="col-6">
     <fieldset class="text-center">
       <b-row class="my-1">
         <b-col sm="3"> 아이디 </b-col>
@@ -21,7 +20,7 @@
       <button @click="loginBtn">로그인</button>
       <button>비밀번호찾기</button>
     </fieldset>
-  </div>
+  </b-container>
 </template>
 
 <script>

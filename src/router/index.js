@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "@/views/HomeView.vue";
-import ArticleView from "@/views/ArticleView.vue";
+import BoardView from "@/views/BoardView.vue";
 import HouseView from "@/views/HouseView.vue";
 import InterestView from "@/views/InterestView.vue";
 import UserView from "@/views/UserView.vue";
@@ -83,9 +83,17 @@ const routes = [
     ],
   },
   {
-    path: "/article",
-    name: "article",
-    component: ArticleView,
+    path: "/board",
+    name: "board",
+    component: BoardView,
+    redirect: "/board/list",
+    children: [
+      {
+        path: "list",
+        name: "boardList",
+        component: () => import("@/components/board/BoardList.vue"),
+      },
+    ],
   },
   {
     path: "/board",
