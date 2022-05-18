@@ -24,6 +24,10 @@ export default new Vuex.Store({
       state.username = user.username;
       state.level = user.level;
     },
+    // update(state, newuser) {
+    //   state.userid = newuser.userid;
+    //   state.username = newuser.username;
+    // },
 
     FORMAT_DATA(state) {
       state.markers = [];

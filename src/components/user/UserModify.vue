@@ -88,7 +88,6 @@ export default {
           console.log(response);
           if (response.data === "update") {
             alert("회원정보수정");
-            this.$store.commit("modify", newuser);
           }
         });
     },
