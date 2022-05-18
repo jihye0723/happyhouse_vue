@@ -1,8 +1,12 @@
 <template>
   <b-row>
-    <b-col cols="10" class="align-self-center">
+    <b-col class="align-text-center">
       <b-tr>
-        <b-td>{{ aptname }} </b-td>
+        <router-link
+          :to="{ name: 'interestdetail', params: { aptname: aptname } }"
+        >
+          <b-td>{{ aptname }}</b-td></router-link
+        >
       </b-tr>
     </b-col>
   </b-row>

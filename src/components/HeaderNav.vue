@@ -9,10 +9,10 @@
           <b-nav-item to="/board">QnA게시판</b-nav-item>
           <b-nav-item v-if="getUser" @click="logout">Logout</b-nav-item>
           <b-nav-item v-else to="/user/login">로그인 및 회원가입</b-nav-item>
-          <b-nav-item to="/detail">회원정보</b-nav-item>
-          <b-nav-item to="/interest">관심목록</b-nav-item>
-          <b-nav-item>매매목록</b-nav-item>
-          <b-nav-item>매매등록</b-nav-item>
+          <b-nav-item v-if="getUser" to="/detail">회원정보</b-nav-item>
+          <b-nav-item v-if="getUser" to="/interest">관심목록</b-nav-item>
+          <b-nav-item v-if="getUser">매매목록</b-nav-item>
+          <b-nav-item v-if="getUser">매매등록</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -32,11 +32,7 @@ export default {
   methods: {},
   computed: {
     getUser() {
-      if (sessionStorage.getItem("userinfo")) {
-        return true;
-      } else {
-        return false;
-      }
+      return this.$store.state.userid;
     },
   },
 };
