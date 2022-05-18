@@ -11,12 +11,7 @@
         </b-col>
         <b-col>
           <b-row>{{ house.no }}</b-row>
-          <b-row
-            >{{
-              (parseInt(house.dealAmount.trim().replace(",", "")) * 10000)
-                | price
-            }}원
-          </b-row>
+          <b-row>{{ house.dealAmount }}원 </b-row>
           <b-row>{{ house.area }} (m2)</b-row>
           <b-row
             >{{ house.dealYear }}년 {{ house.dealMonth }}월
@@ -45,12 +40,13 @@ export default {
   computed: {
     ...mapState(["house", "houseinfo"]),
   },
-  filters: {
-    price(value) {
-      if (!value) return value;
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    },
-  },
+  // filters: {
+  //   price(value) {
+  //     if (!value) return value;
+  //     value = parseInt(value.replace(" ", "").replace(",", "")) * 10000;
+  //     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  //   },
+  // },
   mounted() {},
   methods: {},
 };
