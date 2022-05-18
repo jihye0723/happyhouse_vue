@@ -1,6 +1,8 @@
 <template>
   <div class="text-center">
-    <h2>관심목록 페이지에오</h2>
+    <b-container>
+      <router-view></router-view>
+    </b-container>
   </div>
 </template>
 

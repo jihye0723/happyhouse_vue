@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import http from "@/api/http";
+import router from "@/router";
 
 Vue.use(Vuex);
 
@@ -70,6 +71,9 @@ export default new Vuex.Store({
           },
         })
         .then(function (response) {
+          if (response.status == 204) {
+            alert("로그인 실패 ");
+          }
           const user = {
             userid: response.data.userid,
             username: response.data.username,
@@ -78,6 +82,10 @@ export default new Vuex.Store({
           console.log(user);
           context.commit("login", user);
           // sessionStorage.setItem("userinfo", JSON.stringify(user));
+        })
+        .then(() => router.push({ name: "home" }))
+        .catch((error) => {
+          console.log(error + "로그인 실패입니다.");
         });
     },
     async updateAptcodes({ commit }, playload) {

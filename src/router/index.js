@@ -17,6 +17,7 @@ import UserLogin from "@/components/user/UserLogin.vue";
 // import UserModify from "@/components/user/UserModify.vue";
 import UserRegist from "@/components/user/UserRegist.vue";
 import UserRegistLevel from "@/components/user/UserRegistLevel.vue";
+import InterestList from "@/components/interest/InterestList.vue";
 
 Vue.use(VueRouter);
 
@@ -57,6 +58,14 @@ const routes = [
     path: "/interest",
     name: "interest",
     component: InterestView,
+    redirect: "/interest/list",
+    children: [
+      {
+        path: "list",
+        name: "list",
+        component: InterestList,
+      },
+    ],
   },
   {
     path: "/user",
