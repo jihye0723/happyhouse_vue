@@ -74,12 +74,22 @@ export default {
       };
       console.log(newuser);
 
-      // http.post("/restuser/update", null, {
-      //     params: newuser,
-      // }).then(function(response){
-      //     console.log(response);
-      //     console.log()
-      // })
+      http
+        .post("/restuser/update", null, {
+          params: {
+            username: this.username,
+            userid: this.userid,
+            userpass: this.userpass,
+            phone: this.userphone,
+            email: this.useremail,
+          },
+        })
+        .then(function (response) {
+          console.log(response);
+          if (response.data === "update") {
+            alert("회원정보수정");
+          }
+        });
     },
   },
   created() {

@@ -53,7 +53,7 @@ const routes = [
   },
   {
     path: "/detail",
-    name: "detail",
+    name: "userdetail",
     component: UserDetailView,
     // redirect: "/detail/detail",
     // children: [
