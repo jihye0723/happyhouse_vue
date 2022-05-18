@@ -15,6 +15,7 @@ export default new Vuex.Store({
     houseinfo: null,
     markers: [],
     apartCodes: [],
+    aptcode: "",
   },
   getters: {},
   mutations: {
@@ -30,15 +31,15 @@ export default new Vuex.Store({
     },
     SHOW_APART_DETAIL(state, houseDealInfo) {
       console.log("Show aprart detail");
-      console.log(houseDealInfo);
       state.house = houseDealInfo;
-      console.log("show apart detail success");
       http
         .get("/resthouse/houseInfoByApartCode/" + houseDealInfo.aptCode)
         .then(({ data }) => {
           console.log(data);
-          console.log("Here 3");
           state.houseinfo = data;
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
     // SETTING_HOUSE_INFO(state, houseinfo) {
@@ -48,7 +49,6 @@ export default new Vuex.Store({
       state.apartCodes = aptcodes;
       let markerlist = [];
       aptcodes.forEach((element) => {
-        console.log("resthouse/houseInfoByApartCode/" + element);
         http
           .get("resthouse/houseInfoByApartCode/" + element)
           .then(({ data }) => {
@@ -58,9 +58,16 @@ export default new Vuex.Store({
               lng: data.lng,
             };
             markerlist.push(marker);
+          })
+          .catch((error) => {
+            console.log(error);
           });
       });
       state.markers = markerlist;
+    },
+    SET_MAP_CENTER(state, aptcode) {
+      state.aptcode = aptcode;
+      console.log("set map center", aptcode);
     },
   },
   actions: {
@@ -68,13 +75,15 @@ export default new Vuex.Store({
       commit("FORMAT_DATA");
     },
     showApartDetail({ commit }, houseitem) {
-      console.log("Here 1");
       http
         .get("/resthouse/dealInfoByDealNo/" + houseitem.no)
         .then(({ data }) => {
           commit("SHOW_APART_DETAIL", data);
+          commit("SET_MAP_CENTER", data.aptCode);
           console.log("detail apart code : " + data.aptCode);
-          console.log("Here 2");
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
 
@@ -105,10 +114,13 @@ export default new Vuex.Store({
           console.log(error + "로그인 실패입니다.");
         });
     },
-    async updateAptcodes({ commit }, playload) {
+    async updateAptcodes({ commit }, payload) {
       commit("FORMAT_DATA");
-      await commit("UPDATE_APTCODE", playload);
-      console.log(this.state.markers);
+      await commit("UPDATE_APTCODE", payload);
+    },
+
+    clickStarbucks({ commit }, aptcode) {
+      commit("SET_MAP_CENTER", aptcode);
     },
   },
 

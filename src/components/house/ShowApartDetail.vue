@@ -20,7 +20,9 @@
         </b-col>
       </b-row>
       <b-row class="mx-auto align-center">
-        <b-button class="m-2" variant="success">주변 스타벅스 매장</b-button>
+        <b-button class="m-2" variant="success" @onclick="clickStarbucks"
+          >주변 스타벅스 매장</b-button
+        >
         <b-button class="m-2" variant="primary">관심 등록</b-button>
       </b-row>
     </b-container>
@@ -48,7 +50,9 @@ export default {
   //   },
   // },
   mounted() {},
-  methods: {},
+  methods: {
+    clickStarbucks() {},
+  },
 };
 </script>
 

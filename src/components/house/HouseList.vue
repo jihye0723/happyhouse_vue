@@ -4,7 +4,7 @@
       <div class="m-3">
         <h2><strong>아파트 매매 목록</strong></h2>
       </div>
-      <div>Search KEY : {{ apartName }}, {{ dongCode }}</div>
+      <!-- <div>Search KEY : {{ apartName }}, {{ dongCode }}</div> -->
       <b-row>
         <b-col cols="6" align="center">
           <b-table
@@ -72,15 +72,9 @@ export default {
     if (this.dongCode == 0) this.getDealListByName();
     else this.getDealListByDongCode();
   },
-  mounted() {
-    this.$store.state.markers.push(1);
-  },
+  mounted() {},
 
-  watch: {
-    markers: function (value) {
-      console.log("watch markders : " + value);
-    },
-  },
+  watch: {},
   methods: {
     initSetting() {
       this.$store.dispatch("initSetting");
@@ -135,7 +129,7 @@ export default {
           aptcodes.push(element);
         }
       });
-      console.log("aptcodes : " + aptcodes);
+      console.log("aptcodes : ", aptcodes);
       this.$store.dispatch("updateAptcodes", aptcodes);
     }, // end of setting Table Items
 

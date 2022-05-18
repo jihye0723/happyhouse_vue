@@ -18,22 +18,32 @@ export default {
   },
 
   computed: {
-    ...mapState(["aptcodes", "markers", "isMarkerSet"]),
+    ...mapState(["aptcodes", "markers", "aptcode"]),
   },
   watch: {
     markers: function (value) {
       this.markerPositions.push(value[value.length - 1]);
-      console.log(value.length);
-      // console.log("markers watch : " + value);
-      //      this.displayMarker(value[value.length - 1]);
+    },
+    aptcode: function (value) {
+      let position = {};
+      this.markerPositions.forEach((element) => {
+        if (element.code == value) {
+          position = new kakao.maps.LatLng(element.lat, element.lng);
+        }
+      });
+      this.map.setCenter(position);
     },
   },
 
   created() {
-    this.map = null;
-    window.kakao && window.kakao.maps
-      ? this.initMap()
-      : this.addKakaoMapScript();
+    if (this.map == null) {
+      window.kakao && window.kakao.maps
+        ? this.initMap()
+        : this.addKakaoMapScript();
+    }
+  },
+  mounted() {
+    this.displayMarker();
   },
   methods: {
     addKakaoMapScript() {
@@ -46,7 +56,6 @@ export default {
     },
     initMap() {
       console.log("initMap");
-      console.log(this.markerPositions);
 
       var container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
       var options = {
@@ -61,36 +70,20 @@ export default {
 
     displayMarker() {
       this.centerSetting = false;
-      console.log("display markers");
       this.markerPositions.shift();
-      this.markerPositions.shift();
-      console.log(this.markerPositions);
       this.markerPositions.forEach((element) => {
-        console.log("element", element);
         var position = new kakao.maps.LatLng(element.lat, element.lng);
         var marker = new kakao.maps.Marker({
           map: this.map,
           position: position,
         });
-        // this.markerPositions.push(marker);
+
         marker.setMap(this.map);
-        console.log("clear", position);
         if (!this.centerSetting) {
           this.map.setCenter(position);
           this.centerSetting = true;
         }
-        //        this.map.setCenter(position);
       });
-      // if (this.markers.length > 0) {
-      //   this.markers.forEach((marker) => marker.setMap(null));
-      // }
-      // let positions = [];
-      // markerPositions.forEach((element) => {
-      //   positions.push(new kakao.maps.LatLng(element.lat, element.lng));
-      // });
-      //   const positions = markerPositions.map(
-      //     (position) => new kakao.maps.LatLng(...position)
-      //   );
     },
   },
 };
