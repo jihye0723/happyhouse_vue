@@ -1,5 +1,5 @@
 <template>
-  <b-container class="col-8 mt-3">
+  <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
         <b-alert show><h3>글목록</h3></b-alert>
@@ -34,26 +34,46 @@
           </tbody>
         </b-table-simple>
       </b-col>
-      <b-col v-else class="text-center">도서 목록이 없습니다.</b-col>
+      <!-- <b-col v-else class="text-center">도서 목록이 없습니다.</b-col> -->
     </b-row>
   </b-container>
 </template>
 
 <script>
 import http from "@/api/http";
+import BoardListItem from "@/components/board/item/BoardListItem";
 
 export default {
+  name: "BoardList",
+  components: {
+    BoardListItem,
+  },
   data() {
     return {
       articles: [],
     };
   },
   created() {
-    http.get("/board").then(({ data }) => {
+    //
+    http.get(`/board`).then(({ data }) => {
       this.articles = data;
     });
+  },
+  methods: {
+    moveWrite() {
+      this.$router.push({ name: "boardRegister" });
+    },
   },
 };
 </script>
 
-<style></style>
+<style scope>
+.tdClass {
+  width: 50px;
+  text-align: center;
+}
+.tdSubject {
+  width: 300px;
+  text-align: left;
+}
+</style>

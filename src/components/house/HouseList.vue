@@ -72,8 +72,15 @@ export default {
     if (this.dongCode == 0) this.getDealListByName();
     else this.getDealListByDongCode();
   },
-  mounted() {},
+  mounted() {
+    this.$store.state.markers.push(1);
+  },
 
+  watch: {
+    markers: function (value) {
+      console.log("watch markders : " + value);
+    },
+  },
   methods: {
     initSetting() {
       this.$store.dispatch("initSetting");
@@ -129,7 +136,7 @@ export default {
         }
       });
       console.log("aptcodes : " + aptcodes);
-      // this.$store.dispatch("updateAptcodes", aptcodes);
+      this.$store.dispatch("updateAptcodes", aptcodes);
     }, // end of setting Table Items
 
     selectApartName(houseitem, index) {

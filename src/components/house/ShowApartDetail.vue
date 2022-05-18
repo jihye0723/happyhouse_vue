@@ -3,7 +3,7 @@
     <b-container v-if="houseinfo" class="bv-example-row mt-3">
       <h3><strong>아파트 상세정보</strong></h3>
       <b-row row>
-        <b-col col="2">
+        <b-col>
           <div class="text-align-center">매매번호</div>
           <div class="text-align-center">거래금액</div>
           <div class="text-align-center">면적</div>
