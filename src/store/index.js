@@ -14,6 +14,7 @@ export default new Vuex.Store({
     houseinfo: null,
     markers: [],
     apartCodes: [],
+    isMarkerSet: false,
   },
   getters: {},
   mutations: {
@@ -80,6 +81,7 @@ export default new Vuex.Store({
         });
     },
     async updateAptcodes({ commit }, playload) {
+      this.state.isMarkerSet = false;
       await commit("UPDATE_APTCODE", playload);
       playload.forEach((element, index) => {
         console.log("resthouse/houseInfoByApartCode/" + element);
@@ -94,6 +96,7 @@ export default new Vuex.Store({
             this.state.markers.push(marker);
           });
       });
+      this.state.isMarkerSet = true;
     },
   },
 

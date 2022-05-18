@@ -11,6 +11,12 @@
 <script>
 import { mapState } from "vuex";
 export default {
+  data() {
+    return {
+      markerPositions: [],
+      markerSet: [],
+    };
+  },
   mounted() {
     window.kakao && window.kakao.maps
       ? this.initMap()
@@ -18,14 +24,18 @@ export default {
   },
 
   computed: {
-    ...mapState(["aptcodes", "markers"]),
+    ...mapState(["aptcodes", "markers", "isMarkerSet"]),
   },
   watch: {
+    isMarkerSet: function (value) {
+      if (value) {
+        console.log("is marker setting clear : " + this.$store.state.markers);
+      }
+    },
     markers: function (value) {
-      value.forEach((element) => {
-        console.log(element.code + " " + element.lat + " " + element.lng);
-      });
-      console.log("markers watch : " + value);
+      this.markerPosition = value;
+      // console.log("markers watch : " + value);
+      this.displayMarker(this.markerPositions);
     },
   },
 
@@ -46,10 +56,35 @@ export default {
         level: 3, //지도의 레벨(확대, 축소 정도)
       };
 
-      var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+      this.map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    },
 
-      console.log(map);
-      this.$store.state.markers;
+    displayMarker(markerPositions) {
+      console.log("marker POsitions : " + markerPositions);
+      if (this.markers.length > 0) {
+        this.markers.forEach((marker) => marker.setMap(null));
+      }
+      let positions = [];
+      markerPositions.forEach((element) => {
+        positions.push(new kakao.maps.LatLng(element.lat, element.lng));
+      });
+      //   const positions = markerPositions.map(
+      //     (position) => new kakao.maps.LatLng(...position)
+      //   );
+      if (positions.length > 0) {
+        this.markers = positions.map(
+          (position) =>
+            new kakao.maps.Marker({
+              map: this.map,
+              position,
+            }),
+        );
+        const bounds = positions.reduce(
+          (bounds, latlng) => bounds.extend(latlng),
+          new kakao.maps.LatLngBounds(),
+        );
+        this.map.setBounds(bounds);
+      }
     },
   },
 };
