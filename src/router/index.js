@@ -14,9 +14,9 @@ import HouseRegist from "@/components/house/HouseRegist.vue";
 import HouseSearch from "@/components/house/HouseSearch.vue";
 // import UserDelete from "@/components/user/UserDelete.vue";
 import UserLogin from "@/components/user/UserLogin.vue";
-import UserModify from "@/components/user/UserModify.vue";
+// import UserModify from "@/components/user/UserModify.vue";
 import UserRegist from "@/components/user/UserRegist.vue";
-import UserDetail from "@/components/user/UserDetail.vue";
+// import UserDetail from "@/components/user/UserDetail.vue";
 import UserRegistLevel from "@/components/user/UserRegistLevel.vue";
 import InterestList from "@/components/interest/InterestList.vue";
 import InterestDetail from "@/components/interest/InterestDetail.vue";
@@ -55,19 +55,19 @@ const routes = [
     path: "/detail",
     name: "detail",
     component: UserDetailView,
-    redirect: "/detail/detail",
-    children: [
-      {
-        path: "detail",
-        name: "detail",
-        component: UserDetail,
-      },
-      {
-        path: "modify",
-        name: "modify",
-        component: UserModify,
-      },
-    ],
+    // redirect: "/detail/detail",
+    // children: [
+    //   {
+    //     path: "detail",
+    //     name: "detail",
+    //     component: UserDetail,
+    //   },
+    //   {
+    //     path: "modify",
+    //     name: "modify",
+    //     component: UserModify,
+    //   },
+    // ],
   },
   {
     path: "/interest",
