@@ -29,7 +29,13 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    logout() {
+      sessionStorage.clear();
+      alert("로그아웃");
+      window.location.reload();
+    },
+  },
   computed: {
     getUser() {
       return this.$store.state.userid;

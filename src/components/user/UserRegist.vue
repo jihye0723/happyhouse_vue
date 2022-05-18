@@ -1,22 +1,22 @@
 <template>
-  <div class="b-container">
+  <b-container class="col-10">
     <!-- <h2>회원가입</h2> -->
     <fieldset class="text-center">
       <b-row class="my-3">
-        <b-col sm="3"> 아이디 </b-col>
-        <b-col sm="3">
+        <b-col sm="4"> 아이디 </b-col>
+        <b-col sm="4">
           <b-form-input v-model="userid" placeholder="아이디를 입력하세요" />
         </b-col>
       </b-row>
       <b-row class="my-3">
-        <b-col sm="3"> 이름 </b-col>
-        <b-col sm="3">
+        <b-col sm="4"> 이름 </b-col>
+        <b-col sm="4">
           <b-form-input v-model="username" placeholder="이름을 입력하세요" />
         </b-col>
       </b-row>
       <b-row class="my-3">
-        <b-col sm="3"> 비밀번호 </b-col>
-        <b-col sm="3">
+        <b-col sm="4"> 비밀번호 </b-col>
+        <b-col sm="4">
           <b-form-input
             type="password"
             v-model="userpass"
@@ -26,24 +26,24 @@
       </b-row>
 
       <b-row class="my-3">
-        <b-col sm="3"> 전화번호 </b-col>
-        <b-col sm="1">
+        <b-col sm="4"> 전화번호 </b-col>
+        <b-col sm="2">
           <b-form-select
             v-model="phone1"
             :options="options"
           ></b-form-select> </b-col
         >-
-        <b-col sm="1"> <b-form-input v-model="phone2" placeholder="" /></b-col>-
-        <b-col sm="1">
+        <b-col sm="2"> <b-form-input v-model="phone2" placeholder="" /></b-col>-
+        <b-col sm="2">
           <b-form-input v-model="phone3" placeholder="" />
         </b-col>
       </b-row>
 
       <b-row class="my-3">
-        <b-col sm="3"> 이메일 </b-col>
-        <b-col sm="1"> <b-form-input v-model="emailid" placeholder="" /></b-col
+        <b-col sm="4"> 이메일 </b-col>
+        <b-col sm="3"> <b-form-input v-model="emailid" placeholder="" /></b-col
         >@
-        <b-col sm="1">
+        <b-col sm="3">
           <b-form-select
             v-model="emaildomain"
             :options="options1"
@@ -52,7 +52,7 @@
       </b-row>
       <button @click="registerBtn">회원가입</button>
     </fieldset>
-  </div>
+  </b-container>
 </template>
 
 <script>
