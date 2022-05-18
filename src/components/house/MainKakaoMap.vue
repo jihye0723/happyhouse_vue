@@ -24,11 +24,6 @@ export default {
     ...mapState(["aptcodes", "markers", "isMarkerSet"]),
   },
   watch: {
-    isMarkerSet: function (value) {
-      if (value) {
-        console.log("is marker setting clear : " + this.$store.state.markers);
-      }
-    },
     markers: function (value) {
       this.markerPositions = value;
       // console.log("markers watch : " + value);
@@ -63,6 +58,7 @@ export default {
         var marker = new kakao.maps.Marker({
           position: position,
         });
+        this.markers.push(marker);
         marker.setMap(map);
         if (isFirst) {
           map.setCenter(position);

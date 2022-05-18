@@ -14,7 +14,7 @@
     </b-row>
     <b-row>
       <b-col v-if="articles.length">
-        <b-table-simple hover responsive>
+        <b-table-simple id="my-table" hover responsive>
           <b-thead head-variant="dark">
             <b-tr>
               <b-th>글번호</b-th>

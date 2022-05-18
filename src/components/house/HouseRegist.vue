@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-contanier>
+    <b-container>
       <h2>house regist</h2>
       <b-form class="col-6 mx-auto">
         <div><strong>시/도</strong></div>
@@ -28,11 +28,11 @@
           value-field="code"
           text-field="name"
         ></b-form-select>
-        <div><strong>아파트 명</strong></div>
+        <div><strong>아파트 코드</strong></div>
         <b-form-input
           class="formInput m-3"
-          v-model="apartName"
-          :placeholder="apartNamePlaceHolder"
+          v-model="apartCode"
+          :placeholder="apartCodePlaceHolder"
         />
         <div><strong>거래 금액</strong></div>
         <b-form-input
@@ -46,9 +46,17 @@
           v-model="area"
           :placeholder="areaPlaceHolder"
         />
-        <b-button variant="primary" class="m-5">매물 등록</b-button>
+        <div><strong>거래년도</strong></div>
+        <b-form-input class="formInput m-3" v-model="dealYear" />
+        <div><strong>거래월</strong></div>
+        <b-form-input class="formInput m-3" v-model="dealMonth" />
+        <div><strong>거래일</strong></div>
+        <b-form-input class="formInput m-3" v-model="dealDay" />
+        <b-button variant="primary" class="m-5" @click="registDealInfo"
+          >매물 등록</b-button
+        >
       </b-form>
-    </b-contanier>
+    </b-container>
   </div>
 </template>
 
@@ -66,11 +74,13 @@ export default {
       sidoOptions: [],
       gugunOptions: [{ code: null, name: "구/군 선택" }],
       dongOptions: [{ code: null, name: "동 선택" }],
-
-      apartName: "",
+      dealYear: "",
+      dealMonth: "",
+      dealDay: "",
+      apartCode: "",
       dealAmount: "",
       area: "",
-      apartNamePlaceHolder: "",
+      apartCodePlaceHolder: "",
       dealAmountPlaceHolder: "",
       areaPlaceHolder: "",
     };
@@ -116,6 +126,22 @@ export default {
           this.dongOptions = data;
           this.dongOptions.push({ code: "null", name: "동 선택" });
         });
+    },
+    registDealInfo() {
+      const data = {
+        aptCode: this.apartCode,
+        dealAmount: this.dealAmount,
+        dealYear: this.dealYear,
+        dealMonth: this.dealMonth,
+        dealDay: this.dealDay,
+        area: this.area,
+        floor: this.floor,
+      };
+      http.post("/resthouse/registDealInfo", data).then(({ data }) => {
+        console.log(data);
+        alert("매물 등록 완료");
+        this.$router.path("/");
+      });
     },
   },
 };

@@ -15,7 +15,6 @@ export default new Vuex.Store({
     houseinfo: null,
     markers: [],
     apartCodes: [],
-    isMarkerSet: false,
   },
   getters: {},
   mutations: {
@@ -26,15 +25,16 @@ export default new Vuex.Store({
     },
 
     FORMAT_DATA(state) {
-      state.house = null;
-      state.houseinfo = null;
       state.markers = [];
       state.apartCodes = [];
     },
     SHOW_APART_DETAIL(state, houseDealInfo) {
+      console.log("Show aprart detail");
+
       state.house = houseDealInfo;
     },
     SETTING_HOUSE_INFO(state, houseinfo) {
+      console.log("Here 3");
       state.houseinfo = houseinfo;
     },
     UPDATE_APTCODE(state, aptcodes) {
@@ -46,16 +46,19 @@ export default new Vuex.Store({
       commit("FORMAT_DATA");
     },
     showApartDetail({ commit }, houseitem) {
+      console.log("Here 1");
       http
         .get("/resthouse/dealInfoByDealNo/" + houseitem.no)
         .then(({ data }) => {
           console.log("detail apart code : " + data.aptCode);
           commit("SHOW_APART_DETAIL", data);
+          console.log("Here 2");
 
           http
             .get("/resthouse/houseInfoByApartCode/" + data.aptCode)
             .then(({ data }) => {
               console.log(data.aptName);
+              console.log("Here 3");
               commit("SETTING_HOUSE_INFO", data);
             });
         });
@@ -89,8 +92,9 @@ export default new Vuex.Store({
         });
     },
     async updateAptcodes({ commit }, playload) {
-      this.state.isMarkerSet = false;
-      await commit("UPDATE_APTCODE", playload);
+      commit("FORMAT_DATA");
+      commit("UPDATE_APTCODE", playload);
+      console.log("payload : " + playload);
       playload.forEach((element, index) => {
         console.log("resthouse/houseInfoByApartCode/" + element);
         http
