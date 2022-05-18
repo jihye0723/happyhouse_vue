@@ -16,7 +16,7 @@
           <b-thead bg-variant="gray">
             <b-tr>
               <b-th>아파트명</b-th>
-              <b-th>-</b-th>
+              <b-th></b-th>
               <b-th>-</b-th>
             </b-tr>
           </b-thead>

@@ -77,7 +77,7 @@ const routes = [
     children: [
       {
         path: "list",
-        name: "list",
+        name: "interestlist",
         component: InterestList,
       },
       {
