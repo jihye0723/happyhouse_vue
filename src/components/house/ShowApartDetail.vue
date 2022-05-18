@@ -20,7 +20,7 @@
         </b-col>
       </b-row>
       <b-row class="mx-auto align-center">
-        <b-button class="m-2" variant="success" @onclick="clickStarbucks"
+        <b-button class="m-2" variant="success" @click="clickStarbucks"
           >주변 스타벅스 매장</b-button
         >
         <b-button class="m-2" variant="primary">관심 등록</b-button>
@@ -51,7 +51,11 @@ export default {
   // },
   mounted() {},
   methods: {
-    clickStarbucks() {},
+    clickStarbucks() {
+      console.log(this.$store.state.house);
+      const dongCode = this.$store.state.houseinfo.dongCode;
+      this.$store.dispatch("clickStarbucks", dongCode);
+    },
   },
 };
 </script>

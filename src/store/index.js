@@ -16,8 +16,12 @@ export default new Vuex.Store({
     markers: [],
     apartCodes: [],
     aptcode: "",
+    starbucks: [], // name, address
+    setStarbucks: false,
   },
   getters: {},
+  ////////////////////////////////// mutations /////////////////////////////////////
+
   mutations: {
     login(state, user) {
       state.userid = user.userid;
@@ -69,7 +73,24 @@ export default new Vuex.Store({
       state.aptcode = aptcode;
       console.log("set map center", aptcode);
     },
+    SET_STARBUCKS(state, dongCode) {
+      http
+        .get("/starbucks/search/" + dongCode)
+        .then(({ data }) => {
+          let starbucks = [];
+          data.forEach((element) => {
+            starbucks.push(element);
+          });
+          state.starbucks = starbucks;
+          console.log(state.starbucks);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      state.setStarbucks = true;
+    },
   },
+  ////////////////////////////////// actions /////////////////////////////////////
   actions: {
     initSetting({ commit }) {
       commit("FORMAT_DATA");
@@ -119,8 +140,9 @@ export default new Vuex.Store({
       await commit("UPDATE_APTCODE", payload);
     },
 
-    clickStarbucks({ commit }, aptcode) {
-      commit("SET_MAP_CENTER", aptcode);
+    async clickStarbucks({ commit }, dongCode) {
+      console.log("Vuex click Startbucks", dongCode);
+      await commit("SET_STARBUCKS", dongCode);
     },
   },
 
