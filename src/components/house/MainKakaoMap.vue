@@ -15,12 +15,20 @@ export default {
     window.kakao && window.kakao.maps
       ? this.initMap()
       : this.addKakaoMapScript();
-    console.log(this.$store.state.markers);
   },
 
   computed: {
     ...mapState(["aptcodes", "markers"]),
   },
+  watch: {
+    markers: function (value) {
+      value.forEach((element) => {
+        console.log(element.code + " " + element.lat + " " + element.lng);
+      });
+      console.log("markers watch : " + value);
+    },
+  },
+
   methods: {
     addKakaoMapScript() {
       const script = document.createElement("script");
@@ -41,6 +49,7 @@ export default {
       var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
       console.log(map);
+      this.$store.state.markers;
     },
   },
 };
