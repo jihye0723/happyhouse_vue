@@ -1,7 +1,8 @@
 <template>
-<<<<<<< HEAD
   <b-container class="bv-example-row mt-3 text-center">
-    <h3 class="underline-hotpink">Board Service</h3>
+    <h3 class="underline-hotpink">
+      <b-icon icon="journals"></b-icon> Board Service
+    </h3>
     <router-view></router-view>
   </b-container>
 </template>
@@ -20,15 +21,3 @@ export default {
   );
 }
 </style>
-=======
-  <b-container>
-    <router-view></router-view>
-  </b-container>
-</template>
-
-<script>
-export default {};
-</script>
-
-<style></style>
->>>>>>> 4c0181a7496b659c6f4082f9e261313c7c3bfd75
