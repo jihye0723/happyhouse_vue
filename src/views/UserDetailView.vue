@@ -58,7 +58,6 @@
         ></b-form-input>
       </b-input-group>
       <b-button @click="modify">{{ msg }}</b-button>
-      <b-button hidden @click="modifyend">완료</b-button>
     </b-container>
   </div>
 </template>

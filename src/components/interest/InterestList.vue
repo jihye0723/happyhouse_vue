@@ -1,5 +1,5 @@
 <template>
-  <b-container class="bv-example-row mt=3">
+  <b-container class="col-10 mt-3">
     <b-row>
       <b-col>
         <b-alert show><h3>관심 목록</h3></b-alert>
@@ -13,7 +13,7 @@
     <b-row>
       <b-col>
         <b-table-simple hover responsive>
-          <b-thead head-variant="dark">
+          <b-thead bg-variant="gray">
             <b-tr>
               <b-th>아파트명</b-th>
               <b-th>-</b-th>
@@ -56,7 +56,12 @@ export default {
     console.log("관심목록조회할 사람 : " + userid);
     http.get("/interest/" + userid).then(({ data }) => {
       console.log(data);
-      this.interests = data;
+      data.forEach((element) => {
+        let interest = {
+          aptname: element,
+        };
+        this.interests.push(interest);
+      });
     });
   },
 };

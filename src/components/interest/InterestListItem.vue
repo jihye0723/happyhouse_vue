@@ -1,7 +1,13 @@
 <template>
   <b-row>
-    <b-col cols="10" class="align-self-center">
-      {{ interest }}
+    <b-col class="align-text-center">
+      <b-tr>
+        <router-link
+          :to="{ name: 'interestdetail', params: { aptname: aptname } }"
+        >
+          <b-td>{{ aptname }}</b-td></router-link
+        >
+      </b-tr>
     </b-col>
   </b-row>
 </template>
@@ -9,8 +15,9 @@
 <script>
 export default {
   props: {
-    interest: String,
+    aptname: String,
   },
+  created() {},
 };
 </script>
 

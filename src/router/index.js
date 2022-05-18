@@ -18,6 +18,7 @@ import UserLogin from "@/components/user/UserLogin.vue";
 import UserRegist from "@/components/user/UserRegist.vue";
 import UserRegistLevel from "@/components/user/UserRegistLevel.vue";
 import InterestList from "@/components/interest/InterestList.vue";
+import InterestDetail from "@/components/interest/InterestDetail.vue";
 
 Vue.use(VueRouter);
 
@@ -64,6 +65,11 @@ const routes = [
         path: "list",
         name: "list",
         component: InterestList,
+      },
+      {
+        path: "detail/:aptname",
+        name: "interestdetail",
+        component: InterestDetail,
       },
     ],
   },
