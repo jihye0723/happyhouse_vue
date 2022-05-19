@@ -1,6 +1,6 @@
 <template>
-  <div class="text-center">
-    <b-navbar toggleable="lg" type="dark" variant="info">
+  <div class="text-center p-0">
+    <b-navbar class="m-0" toggleable="lg" type="dark" variant="info">
       <b-navbar-brand href="#" to="/">HappyHouse</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
