@@ -143,6 +143,7 @@ export default {
     },
     clickSearchButton() {
       // this.$store.dispatch("formatData");
+      document.getElementById("map").innerHTML = ""; //지도를 담을 영역의 DOM 레퍼런스
     },
   },
 };

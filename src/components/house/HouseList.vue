@@ -6,8 +6,12 @@
       </div>
       <!-- <div>Search KEY : {{ apartName }}, {{ dongCode }}</div> -->
       <b-row>
-        <b-col cols="6" align="center">
+        <b-col><main-kakao-map></main-kakao-map></b-col>
+      </b-row>
+      <b-row>
+        <b-col cols="8" align="center">
           <b-table
+            class="m-3"
             striped
             hover
             id="dealtable"
@@ -27,7 +31,6 @@
           ></b-pagination>
         </b-col>
         <b-col>
-          <main-kakao-map></main-kakao-map>
           <show-apart-detail></show-apart-detail>
         </b-col>
       </b-row>
@@ -51,7 +54,7 @@ export default {
       dongCode: "", // route param으로 넘겨받은 행정동 코드
       dealList: [], // apartName으로 검색한 매물 목록
       tableitems: [],
-      perPage: 10,
+      perPage: 5,
       currentPage: 1,
       fields: [
         { key: "no", label: "매매번호" },

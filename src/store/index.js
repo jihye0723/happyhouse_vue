@@ -2,16 +2,11 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import http from "@/api/http";
-// import router from "@/router";
-
-import memberStore from "@/store/modules/memberStore.js";
+import router from "@/router";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  modules: {
-    memberStore,
-  },
   state: {
     userid: "",
     username: "",
@@ -67,7 +62,8 @@ export default new Vuex.Store({
           .get("resthouse/houseInfoByApartCode/" + element)
           .then(({ data }) => {
             let marker = {
-              code: element,
+              name: data.aptName,
+              code: data.aptCode,
               lat: data.lat,
               lng: data.lng,
             };
@@ -120,6 +116,34 @@ export default new Vuex.Store({
           console.log(error);
         });
     },
+
+    loginvv(context, user) {
+      console.log(user.userid + " " + user.userpass);
+      http
+        .post("/restuser/login", null, {
+          params: {
+            userid: user.userid,
+            userpass: user.userpass,
+          },
+        })
+        .then(function (response) {
+          if (response.status == 204) {
+            alert("로그인 실패 ");
+          }
+          const user = {
+            userid: response.data.userid,
+            username: response.data.username,
+            level: response.data.level,
+          };
+          console.log(user);
+          context.commit("login", user);
+          // sessionStorage.setItem("userinfo", JSON.stringify(user));
+        })
+        .then(() => router.push({ name: "home" }))
+        .catch((error) => {
+          console.log(error + "로그인 실패입니다.");
+        });
+    },
     async updateAptcodes({ commit }, payload) {
       commit("FORMAT_DATA");
       await commit("UPDATE_APTCODE", payload);
@@ -133,6 +157,8 @@ export default new Vuex.Store({
       commit("FORMAT_DATA");
     },
   },
+
+  modules: {},
   plugins: [
     createPersistedState({
       // 브라우저 종료시 제거하기 위해 localStorage가 아닌 sessionStorage로 변경. (default: localStorage)

@@ -17,6 +17,11 @@ export default {
       starbucksList: [],
     };
   },
+  updated: function () {
+    this.$nextTick(function () {
+      // Code that will run only after the // entire view has been re-rendered
+    });
+  },
 
   computed: {
     ...mapState([
@@ -47,23 +52,19 @@ export default {
     },
   },
 
-  created() {
-    if (this.map == null) {
-      window.kakao && window.kakao.maps
-        ? this.initMap()
-        : this.addKakaoMapScript();
-    }
-  },
-  mounted() {},
-  methods: {
-    addKakaoMapScript() {
+  mounted() {
+    if (window.kakao && window.kakao.maps) {
+      this.initMap();
+    } else {
       const script = document.createElement("script");
       /* global kakao */
       script.onload = () => kakao.maps.load(this.initMap);
       script.src =
         "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=8273ad75e4cf13f650633b14013a60c0&libraries=services";
       document.head.appendChild(script);
-    },
+    }
+  },
+  methods: {
     initMap() {
       console.log("initMap");
 
@@ -71,16 +72,17 @@ export default {
       var options = {
         //지도를 생성할 때 필요한 기본 옵션
         center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-        level: 3, //지도의 레벨(확대, 축소 정도)
+        level: 4, //지도의 레벨(확대, 축소 정도)
       };
-      this.map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
+      if (this.map == null) this.map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+      this.map.relayout();
       this.displayMarker();
     },
 
     displayMarker() {
       this.centerSetting = false;
       this.markerPositions.shift();
+
       this.markerPositions.forEach((element) => {
         var position = new kakao.maps.LatLng(element.lat, element.lng);
         var marker = new kakao.maps.Marker({
@@ -89,11 +91,21 @@ export default {
         });
 
         marker.setMap(this.map);
+
+        var infowindow = new kakao.maps.InfoWindow({
+          content:
+            '<div style="width:200px;text-align:center;padding:6px 0;">' +
+            element.name +
+            "</div>",
+        });
+        infowindow.open(this.map, marker);
+
         if (!this.centerSetting) {
           this.map.setCenter(position);
           this.centerSetting = true;
         }
       });
+      this.map.relayout();
     },
     setStarbucksLocation() {
       console.log("set starbucks locations", this.starbucksList);
@@ -127,6 +139,7 @@ export default {
           }
         });
       });
+      this.map.relayout();
     },
   },
 };
@@ -135,6 +148,6 @@ export default {
 <style lang="scss" scoped>
 #map {
   width: 100%;
-  height: 400px;
+  height: 500px;
 }
 </style>
