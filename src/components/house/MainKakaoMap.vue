@@ -54,9 +54,7 @@ export default {
         : this.addKakaoMapScript();
     }
   },
-  mounted() {
-    this.displayMarker();
-  },
+  mounted() {},
   methods: {
     addKakaoMapScript() {
       const script = document.createElement("script");

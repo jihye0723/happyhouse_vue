@@ -23,7 +23,9 @@
         <b-button class="m-2" variant="success" @click="clickStarbucks"
           >주변 스타벅스 매장</b-button
         >
-        <b-button class="m-2" variant="primary">관심 등록</b-button>
+        <b-button class="m-2" variant="primary" @click="clickInterest"
+          >관심 등록</b-button
+        >
       </b-row>
     </b-container>
   </div>
@@ -31,7 +33,7 @@
 
 <script>
 import { mapState } from "vuex";
-
+import http from "@/api/http";
 export default {
   name: "ShowApartDetail",
 
@@ -55,6 +57,23 @@ export default {
       console.log(this.$store.state.house);
       const dongCode = this.$store.state.houseinfo.dongCode;
       this.$store.dispatch("clickStarbucks", dongCode);
+    },
+    clickInterest() {
+      const userid = this.$store.state.userid;
+      const aptCode = this.$store.state.houseinfo.aptCode;
+      if (userid == "") {
+        alert("로그인 후 이용하세요");
+      }
+      console.log(userid, aptCode);
+      let params = {
+        userid: userid,
+        aptCode: aptCode,
+      };
+      http.post("/interest/regist", params).then((response) => {
+        if (response.data == 1) {
+          alert("관심매물에 등록되었습니다.");
+        }
+      });
     },
   },
 };

@@ -56,6 +56,7 @@ export default new Vuex.Store({
     UPDATE_APTCODE(state, aptcodes) {
       state.apartCodes = aptcodes;
       let markerlist = [];
+      let index = aptcodes.length;
       aptcodes.forEach((element) => {
         http
           .get("resthouse/houseInfoByApartCode/" + element)
@@ -66,11 +67,14 @@ export default new Vuex.Store({
               lng: data.lng,
             };
             markerlist.push(marker);
+            index = index - 1;
+            console.log(index);
           })
           .catch((error) => {
             console.log(error);
           });
       });
+      console.log("INDEX : ", index);
       state.markers = markerlist;
     },
     SET_MAP_CENTER(state, aptcode) {
@@ -147,6 +151,9 @@ export default new Vuex.Store({
     async clickStarbucks({ commit }, dongCode) {
       console.log("Vuex click Startbucks", dongCode);
       await commit("SET_STARBUCKS", dongCode);
+    },
+    formatData({ commit }) {
+      commit("FORMAT_DATA");
     },
   },
 

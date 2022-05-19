@@ -58,6 +58,7 @@
           :to="{ name: 'list', params: { code: 0, name: apartName } }"
           variant="primary"
           class="m-5"
+          @click="clickSearchButton"
           >검색</b-button
         >
       </b-form>
@@ -105,8 +106,10 @@ export default {
     // axios를 통해 rest server에서 sido 정보 얻어오기
     getSidoList() {
       http.get("http://localhost:9999/server/region/sido").then(({ data }) => {
-        this.sidoOptions = data;
         this.sidoOptions.push({ code: null, name: "시/도 선택" });
+        data.forEach((element) => {
+          this.sidoOptions.push(element);
+        });
       });
     },
 
@@ -114,17 +117,18 @@ export default {
       http
         .get("http://localhost:9999/server/region/gugun/" + this.sidoCode)
         .then(({ data }) => {
-          this.gugunOptions = data;
-          this.gugunOptions.push({ code: null, name: "구/군 선택" });
+          data.forEach((element) => {
+            this.gugunOptions.push(element);
+          });
         });
     },
     settingDongOption() {
       http
         .get("http://localhost:9999/server/region/dong/" + this.gugunCode)
         .then(({ data }) => {
-          console.log(data);
-          this.dongOptions = data;
-          this.dongOptions.push({ code: "null", name: "동 선택" });
+          data.forEach((element) => {
+            this.dongOptions.push(element);
+          });
         });
     },
     // 동이름으로 검색하기 버튼 클릭시 입력리스트 수정
@@ -136,6 +140,9 @@ export default {
     clickApartSearch() {
       this.dongSearch = false;
       this.apartSearch = true;
+    },
+    clickSearchButton() {
+      // this.$store.dispatch("formatData");
     },
   },
 };
