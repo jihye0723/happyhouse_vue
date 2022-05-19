@@ -28,23 +28,31 @@
 
 <script>
 const memberStore = "memberStore";
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
       user: {
-        userid: null,
-        userpass: null,
+        userid: "",
+        userpass: "",
       },
     };
   },
-
+  computed: {
+    ...mapState(memberStore, ["isLogin"]),
+  },
   methods: {
-    ...mapActions(memberStore, ["userConfirm"]),
+    ...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
     async loginBtn() {
+      console.log("로그인할 사용자 : " + this.user.userid);
       await this.userConfirm(this.user);
       let token = sessionStorage.getItem("access-token");
-      console.log(token);
+      //로그인 됬으면,
+      if (this.isLogin) {
+        //console.log("로그인 되었음 ");
+        await this.getUserInfo(token);
+        this.$router.push({ name: "home" });
+      }
     },
   },
 };
