@@ -34,7 +34,6 @@ export default {
   methods: {
     initMap() {
       console.log("initMap");
-      
 
       var container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
       var options = {

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <b-container class="col-6">
+    <b-container class="col-6" v-if="userInfo">
       <b-input-group class="m-3">
         <template #prepend>
           <b-input-group-text class="bg-dark text-light"
             >이름
           </b-input-group-text>
         </template>
-        <b-form-input v-model="userinfo.username" readonly></b-form-input>
+        <b-form-input value="userInfo.username" readonly />
       </b-input-group>
       <b-input-group class="m-3">
         <template #prepend>
@@ -15,11 +15,7 @@
             >아이디</b-input-group-text
           >
         </template>
-        <b-form-input
-          class="input"
-          v-model="userinfo.userid"
-          readonly
-        ></b-form-input>
+        <b-form-input placeholder="userInfo.userid" readonly />
       </b-input-group>
       <b-input-group class="m-3">
         <template #prepend>
@@ -27,7 +23,7 @@
             >비밀번호</b-input-group-text
           >
         </template>
-        <b-form-input v-model="userinfo.userpass" readonly></b-form-input>
+        <b-form-input value="${userInfo.userpass}" readonly />
       </b-input-group>
       <b-input-group class="m-3">
         <template #prepend>
@@ -35,7 +31,7 @@
             >전화번호</b-input-group-text
           >
         </template>
-        <b-form-input v-model="userinfo.phone" readonly></b-form-input>
+        <b-form-input value="userInfo.phone" readonly />
       </b-input-group>
       <b-input-group class="m-3">
         <template #prepend>
@@ -43,35 +39,19 @@
             >이메일</b-input-group-text
           >
         </template>
-        <b-form-input v-model="userinfo.email" readonly></b-form-input>
+        <b-form-input value="userInfo.email" readonly />
       </b-input-group>
     </b-container>
   </div>
 </template>
 
 <script>
-import http from "@/api/http";
+import { mapState } from "vuex";
+
+const memberStore = "memberStore";
 export default {
-  data() {
-    return {
-      userinfo: {},
-    };
-  },
-  created() {
-    let userid = this.$store.state.userid;
-    let username = this.$store.state.username;
-    console.log(userid);
-    http
-      .get("restuser/user", {
-        params: {
-          userid: userid,
-          username: username,
-        },
-      })
-      .then(({ data }) => {
-        console.log(data);
-        this.userinfo = data;
-      });
+  computed: {
+    ...mapState(memberStore, ["userInfo"]),
   },
 };
 </script>
