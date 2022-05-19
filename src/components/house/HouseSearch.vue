@@ -1,68 +1,68 @@
 <template>
   <div>
-    <b-container>
-      <h2>검색 방식을 선택하세요</h2>
-      <div class="row col-6 mx-auto">
-        <b-button variant="primary" class="m-2 col" @click="clickDongSearch"
-          >동이름으로 검색</b-button
-        >
-        <b-button variant="primary" class="m-2 col" @click="clickApartSearch"
-          >아파트 이름으로 검색</b-button
-        >
-      </div>
-      <div style="height: 100px"></div>
+    <!-- <b-container> -->
+    <h2>검색 방식을 선택하세요</h2>
+    <div class="row col-6 mx-auto">
+      <b-button variant="primary" class="m-2 col" @click="clickDongSearch"
+        >동이름으로 검색</b-button
+      >
+      <b-button variant="primary" class="m-2 col" @click="clickApartSearch"
+        >아파트 이름으로 검색</b-button
+      >
+    </div>
+    <div style="height: 100px"></div>
 
-      <b-form v-if="dongSearch" class="col-6 mx-auto">
-        <div><strong>시/도</strong></div>
-        <b-form-select
-          v-model="sidoCode"
-          :options="sidoOptions"
-          class="form-select m-3"
-          value-field="code"
-          text-field="name"
-        ></b-form-select>
-        <div><strong>구/군</strong></div>
-        <b-form-select
-          v-model="gugunCode"
-          :options="gugunOptions"
-          class="form-select m-3"
-          value-field="code"
-          text-field="name"
-        ></b-form-select>
-        <div><strong>행정동</strong></div>
+    <b-form v-if="dongSearch" class="col-6 mx-auto">
+      <div><strong>시/도</strong></div>
+      <b-form-select
+        v-model="sidoCode"
+        :options="sidoOptions"
+        class="form-select m-3"
+        value-field="code"
+        text-field="name"
+      ></b-form-select>
+      <div><strong>구/군</strong></div>
+      <b-form-select
+        v-model="gugunCode"
+        :options="gugunOptions"
+        class="form-select m-3"
+        value-field="code"
+        text-field="name"
+      ></b-form-select>
+      <div><strong>행정동</strong></div>
 
-        <b-form-select
-          v-model="dongCode"
-          :options="dongOptions"
-          class="form-select m-3"
-          value-field="code"
-          text-field="name"
-        ></b-form-select>
-        <b-button
-          :to="{ name: 'list', params: { code: dongCode, name: apartName } }"
-          variant="primary"
-          class="m-5"
-          >검색</b-button
-        >
-      </b-form>
+      <b-form-select
+        v-model="dongCode"
+        :options="dongOptions"
+        class="form-select m-3"
+        value-field="code"
+        text-field="name"
+      ></b-form-select>
+      <b-button
+        :to="{ name: 'list', params: { code: dongCode, name: apartName } }"
+        variant="primary"
+        class="m-5"
+        >검색</b-button
+      >
+    </b-form>
 
-      <b-form v-if="apartSearch" class="col-6 mx-auto">
-        <div><strong>아파트 이름</strong></div>
-        <b-form-input
-          class="formInput"
-          v-model="apartName"
-          :placeholder="apartNamePlaceHolder"
-        />
+    <b-form v-if="apartSearch" class="col-6 mx-auto">
+      <div><strong>아파트 이름</strong></div>
+      <b-form-input
+        class="formInput"
+        v-model="apartName"
+        :placeholder="apartNamePlaceHolder"
+      />
 
-        <b-button
-          :to="{ name: 'list', params: { code: 0, name: apartName } }"
-          variant="primary"
-          class="m-5"
-          @click="clickSearchButton"
-          >검색</b-button
-        >
-      </b-form>
-    </b-container>
+      <b-button
+        :to="{ name: 'list', params: { code: 0, name: apartName } }"
+        variant="primary"
+        class="m-5"
+        @click="clickSearchButton"
+        >검색</b-button
+      >
+    </b-form>
+    <!-- </b-container> -->
   </div>
 </template>
 

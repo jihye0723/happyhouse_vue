@@ -6,6 +6,7 @@ import HouseView from "@/views/HouseView.vue";
 import InterestView from "@/views/InterestView.vue";
 import UserView from "@/views/UserView.vue";
 import UserDetailView from "@/views/UserDetailView.vue";
+import KakaoMapView from "@/views/KakaoMapView";
 // //import MainContent from "@/components/MainContent.vue";
 // import HouseDetail from "@/components/house/HouseDetail.vue";
 // import HouseList from "@/components/house/HouseList.vue";
@@ -20,7 +21,6 @@ import UserRegist from "@/components/user/UserRegist.vue";
 import UserRegistLevel from "@/components/user/UserRegistLevel.vue";
 import InterestList from "@/components/interest/InterestList.vue";
 import InterestDetail from "@/components/interest/InterestDetail.vue";
-
 Vue.use(VueRouter);
 
 const routes = [
@@ -29,6 +29,12 @@ const routes = [
     name: "home",
     component: HomeView,
   },
+  {
+    path: "/map",
+    name: "map",
+    component: KakaoMapView,
+  },
+
   {
     path: "/house",
     name: "house",
