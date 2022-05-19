@@ -4,7 +4,10 @@
       <b-row class="my-1">
         <b-col sm="3"> 아이디 </b-col>
         <b-col sm="9">
-          <b-form-input v-model="userid" placeholder="아이디를 입력하세요" />
+          <b-form-input
+            v-model="user.userid"
+            placeholder="아이디를 입력하세요"
+          />
         </b-col>
       </b-row>
       <b-row class="my-1">
@@ -12,7 +15,7 @@
         <b-col sm="9">
           <b-form-input
             type="password"
-            v-model="userpass"
+            v-model="user.userpass"
             placeholder="비밀번호를 입력하세요"
           />
         </b-col>
@@ -24,23 +27,24 @@
 </template>
 
 <script>
+const memberStore = "memberStore";
 import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      userid: "",
-      userpass: "",
+      user: {
+        userid: null,
+        userpass: null,
+      },
     };
   },
 
   methods: {
-    ...mapActions({ loginvv: "loginvv" }),
-    loginBtn() {
-      let user = {
-        userid: this.userid,
-        userpass: this.userpass,
-      };
-      this.loginvv(user);
+    ...mapActions(memberStore, ["userConfirm"]),
+    async loginBtn() {
+      await this.userConfirm(this.user);
+      let token = sessionStorage.getItem("access-token");
+      console.log(token);
     },
   },
 };
